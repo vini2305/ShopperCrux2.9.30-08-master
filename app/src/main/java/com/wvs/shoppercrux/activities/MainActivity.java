@@ -76,10 +76,10 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawerLis
        //  getSupportActionBar().setDisplayShowHomeEnabled(true);
 
 
-        drawerFragment = (FragmentDrawer)
+       // drawerFragment = (FragmentDrawer)
                 getSupportFragmentManager().findFragmentById(R.id.fragment_navigation_drawer);
-        drawerFragment.setUp(R.id.fragment_navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout), mToolbar);
-        drawerFragment.setDrawerListener(this);
+//        drawerFragment.setUp(R.id.fragment_navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout), mToolbar);
+       // drawerFragment.setDrawerListener(this);
         NavigationDrawerFragment drawerFragment = (NavigationDrawerFragment)
                 getSupportFragmentManager().findFragmentById(R.id.fragment_navigation_drawer1);
         drawerFragment.setUp(R.id.fragment_navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout), mToolbar);

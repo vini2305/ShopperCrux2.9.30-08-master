@@ -88,7 +88,7 @@ public class StoreFragment extends Fragment implements OnQueryTextListener {
             if(bundle.getString("locationId") != null) {
                 id = bundle.getString("locationId");
                 STORE_URL = GET_JSON_DATA_HTTP_URL + id;
-                Log.d("location id", STORE_URL);
+                Log.d("store_url", STORE_URL);
             }
            else if((bundle.getString("categoryId")!= null)){
 
@@ -99,7 +99,7 @@ public class StoreFragment extends Fragment implements OnQueryTextListener {
                     plid = bundle.getString("locationId");
                     sid = bundle.getString("categoryId");
                     CATEGORY_STORE_URL = GET_CATEGORY_BASED+"?sid="+sid+"&id="+plid;
-                    Log.d("category id", CATEGORY_STORE_URL);
+                    Log.d("categoryUrl", CATEGORY_STORE_URL);
                 }
 
             }

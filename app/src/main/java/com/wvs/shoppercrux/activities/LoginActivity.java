@@ -293,7 +293,7 @@ public class LoginActivity extends AppCompatActivity implements ConnectivityRece
                         session.setLogin(false);
                         LoginManager.getInstance().logOut();
                         View view = findViewById(R.id.view);
-                        Snackbar.make(view, "Cannot perform Social login", Snackbar.LENGTH_LONG)
+                        Snackbar.make(view, "Cannot Perform Social login: FB login created through phone not via Email, Login to FB through email and reopen the Shopper Crux APP", Snackbar.LENGTH_INDEFINITE)
                                 .setAction("Action", null).show();
 //                        Context mContext;
 //                        AlertDialog.Builder alert = new AlertDialog.Builder(LoginActivity.this, R.style.AppTheme);

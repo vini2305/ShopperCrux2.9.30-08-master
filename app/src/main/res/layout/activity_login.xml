@@ -73,14 +73,17 @@
                 android:layout_height="wrap_content"
                 />
 
-            <com.facebook.login.widget.LoginButton
-                android:id="@+id/login_button"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:visibility="gone"
-                />
-
+        <com.facebook.login.widget.LoginButton
+            android:id="@+id/login_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="30dp" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/view"/>
         <TextView android:id="@+id/link_signup"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -103,4 +106,5 @@
             android:typeface="monospace"/>
 
     </LinearLayout>
+
 </ScrollView>

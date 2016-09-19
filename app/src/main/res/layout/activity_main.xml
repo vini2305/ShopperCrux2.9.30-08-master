@@ -27,14 +27,7 @@
     </RelativeLayout>
 
 
-    <fragment
-        android:id="@+id/fragment_navigation_drawer"
-        android:name="com.wvs.shoppercrux.activities.FragmentDrawer"
-        android:layout_width="@dimen/nav_drawer_width"
-        android:layout_height="match_parent"
-        android:layout_gravity="right"
-        android:layout="@layout/fragment_navigation_drawer"
-        tools:layout="@layout/fragment_navigation_drawer" />
+
 
 
     <fragment

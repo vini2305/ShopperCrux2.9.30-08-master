@@ -91,7 +91,7 @@ private ActionBarDrawerToggle mDrawerToggle;
     private void requestJsonObject(){
 
         RequestQueue queue = Volley.newRequestQueue(getContext());
-        String url ="http://prachodayat.in/shopper_android_api/category.php";
+        String url ="http://shoppercrux.com/shopper_android_api/category.php";
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
