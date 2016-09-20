@@ -8,13 +8,13 @@ public class AppConfig {
     public static final String URL_LOGIN = "http://shoppercrux.com/shopper_android_api/login.php";
 
     // Server user register url
-//    public static final String URL_REGISTER = "http://shoppercrux.com/shopper_android_api/register.php";
+    public static final String URL_REGISTER = "http://shoppercrux.com/shopper_android_api/register.php";
 
-    public static final String URL_REGISTER = "http://prachodayat.in/shopper_android_api//register.php";
+//    public static final String URL_REGISTER = "http://prachodayat.in/shopper_android_api//register.php";
 
-//    public static final String URL_VERIFY_OTP = "http://shoppercrux.com/shopper_android_api/verify_otp.php";
+    public static final String URL_VERIFY_OTP = "http://shoppercrux.com/shopper_android_api/verify_otp.php";
 
-    public static final String URL_VERIFY_OTP = "http://prachodayat.in/shopper_android_api/verify_otp.php";
+//    public static final String URL_VERIFY_OTP = "http://prachodayat.in/shopper_android_api/verify_otp.php";
 
     public static final String URL_USER_OTP_VERIFY="http://shoppercrux.com/shopper_android_api/userOtpVerify.php";
 

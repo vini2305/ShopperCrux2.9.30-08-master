@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -64,6 +65,7 @@ public class UserVerify extends AppCompatActivity {
     private RequestQueue requestQueue;
     String PHONE_PREFS_NAME="PhoneNumber";
     String LOCATION_PIN="LocationPin";
+    private EditText input_otp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,6 +80,7 @@ public class UserVerify extends AppCompatActivity {
         cod = (Button) findViewById(R.id.cod);
         pgway = (Button) findViewById(R.id.pgway);
         otp = (Button) findViewById(R.id.btn_otp_verify);
+        input_otp = (EditText) findViewById(R.id.input_otp);
 
         pgway.setOnClickListener(new OnClickListener() {
             @Override
@@ -100,8 +103,13 @@ public class UserVerify extends AppCompatActivity {
             @Override
             public void onClick(View view) {
             String userid = SQLiteHandler.user_id;
-            String getOtp = otp.getText().toString().trim();
-            otpVerify(getOtp,userid);
+            String getOtp = input_otp.getText().toString();
+
+            if(getOtp.isEmpty()) {
+                Toast.makeText(getApplicationContext(),"Please enter the otp to get verified",Toast.LENGTH_LONG).show();
+            } else {
+                otpVerify(getOtp,userid);
+            }
             }
         });
 

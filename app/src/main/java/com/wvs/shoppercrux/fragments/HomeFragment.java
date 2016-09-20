@@ -440,6 +440,7 @@ public class HomeFragment extends Fragment implements GoogleMap.OnMyLocationButt
 //        }
 //    }
 
+
     public void getStoreList(){
 
         // Tag used to cancel the request

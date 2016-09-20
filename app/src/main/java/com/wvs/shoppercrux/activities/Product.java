@@ -95,8 +95,6 @@ public class Product extends AppCompatActivity implements SearchView.OnQueryText
         getDataAdapters = new ArrayList<>();
         recyclerView = (RecyclerView) findViewById(R.id.recyclerview1);
         recyclerView.setHasFixedSize(true);
-
-
 //        recyclerViewlayoutManager = new LinearLayoutManager(this);
 
         recyclerViewlayoutManager= new GridLayoutManager(this,3);

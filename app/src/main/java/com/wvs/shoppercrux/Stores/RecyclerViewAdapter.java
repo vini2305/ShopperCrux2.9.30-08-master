@@ -53,30 +53,44 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
         GetDataAdapter getDataAdapter1 = getDataAdapter.get(position);
 
-        imageLoader1 = ServerImageParseAdapter.getInstance(context).getImageLoader();
+        if(getDataAdapter1.getImageServerUrl() != null) {
 
-        imageLoader1.get(getDataAdapter1.getImageServerUrl(),
-                ImageLoader.getImageListener(
-                        viewHolder.networkImageView,//Server Image
-                        R.mipmap.ic_launcher,//Before loading server image the default showing image.
-                        android.R.drawable.ic_dialog_alert //Error image if requested image dose not found on server.
-                )
-        );
+            imageLoader1 = ServerImageParseAdapter.getInstance(context).getImageLoader();
 
-        viewHolder.networkImageView.setImageUrl(getDataAdapter1.getImageServerUrl(), imageLoader1);
-        Log.d("StoreUrl","Store image urls:"+getDataAdapter1.getImageServerUrl());
-        viewHolder.ImageTitleNameView.setText(getDataAdapter1.getImageTitleName());
-        viewHolder.sellerId.setText(getDataAdapter1.getSellerID());
-        viewHolder.sellerAddress.setText(stripHtml(getDataAdapter1.getSellerAddress()));
-        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String seller_data_id =getDataAdapter.get(position).getSellerID();
-                Intent i = new Intent(context, Product.class);
-                i.putExtra("seller_id",seller_data_id);
-                context.startActivity(i);
-            }
-        });
+            imageLoader1.get(getDataAdapter1.getImageServerUrl(),
+                    ImageLoader.getImageListener(
+                            viewHolder.networkImageView,//Server Image
+                            R.mipmap.ic_launcher,//Before loading server image the default showing image.
+                            android.R.drawable.ic_dialog_alert //Error image if requested image dose not found on server.
+                    )
+            );
+
+            viewHolder.networkImageView.setImageUrl(getDataAdapter1.getImageServerUrl(), imageLoader1);
+            Log.d("StoreUrl","Store image urls:"+getDataAdapter1.getImageServerUrl());
+            viewHolder.ImageTitleNameView.setText(getDataAdapter1.getImageTitleName());
+            viewHolder.sellerId.setText(getDataAdapter1.getSellerID());
+            viewHolder.sellerAddress.setText(stripHtml(getDataAdapter1.getSellerAddress()));
+            viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String seller_data_id =getDataAdapter.get(position).getSellerID();
+                    Intent i = new Intent(context, Product.class);
+                    i.putExtra("seller_id",seller_data_id);
+                    context.startActivity(i);
+                }
+            });
+
+        }
+        else {
+            viewHolder.errorText.setVisibility(View.VISIBLE);
+            viewHolder.ImageTitleNameView.setVisibility(View.GONE);
+            viewHolder.networkImageView.setVisibility(View.GONE);
+            viewHolder.sellerId.setVisibility(View.GONE);
+            viewHolder.sellerAddress.setVisibility(View.GONE);
+        }
+
+
+
         //holder.itemView.setOnClickListener(new View.OnClickListener() {
     }
 
@@ -96,6 +110,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         public TextView ImageTitleNameView;
         public NetworkImageView networkImageView;
         public TextView sellerId,sellerAddress;
+        TextView errorText;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -103,6 +118,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             networkImageView = (NetworkImageView) itemView.findViewById(R.id.VollyNetworkImageView1);
             sellerId = (TextView) itemView.findViewById(R.id.tx_seller_id);
             sellerAddress = (TextView) itemView.findViewById(R.id.seller_address);
+            errorText = (TextView) itemView.findViewById(R.id.error_text);
         }
     }
 

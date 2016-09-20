@@ -54,7 +54,14 @@
                />
 
         </LinearLayout>
-
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="No stores Available"
+            android:visibility="gone"
+            android:id="@+id/error_text"
+            android:layout_gravity="bottom" />
     </LinearLayout>
 
     </android.support.v7.widget.CardView>

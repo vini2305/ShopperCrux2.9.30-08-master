@@ -8,7 +8,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.LayerDrawable;
 import android.location.LocationManager;
 import android.os.Build;
@@ -68,18 +67,18 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawerLis
 
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         mToolbar.setTitle("");
-      //  mToolbar.setLogo(R.mipmap.ic_launcher);
+        //  mToolbar.setLogo(R.mipmap.ic_launcher);
         setSupportActionBar(mToolbar);
-      //  getSupportActionBar().setIcon(
-       //        new ColorDrawable(getResources().getColor(android.R.color.transparent)));
+        //  getSupportActionBar().setIcon(
+        //        new ColorDrawable(getResources().getColor(android.R.color.transparent)));
 
-       //  getSupportActionBar().setDisplayShowHomeEnabled(true);
+        //  getSupportActionBar().setDisplayShowHomeEnabled(true);
 
 
-       // drawerFragment = (FragmentDrawer)
-                getSupportFragmentManager().findFragmentById(R.id.fragment_navigation_drawer);
+        // drawerFragment = (FragmentDrawer)
+        getSupportFragmentManager().findFragmentById(R.id.fragment_navigation_drawer);
 //        drawerFragment.setUp(R.id.fragment_navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout), mToolbar);
-       // drawerFragment.setDrawerListener(this);
+        // drawerFragment.setDrawerListener(this);
         NavigationDrawerFragment drawerFragment = (NavigationDrawerFragment)
                 getSupportFragmentManager().findFragmentById(R.id.fragment_navigation_drawer1);
         drawerFragment.setUp(R.id.fragment_navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout), mToolbar);
@@ -187,7 +186,7 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawerLis
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-              case id.mycart:
+            case id.mycart:
                 Intent intent = new Intent(MainActivity.this,CartActivity.class);
                 startActivity(intent);
                 return true;
@@ -225,7 +224,7 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawerLis
         } else {
             Product.setBadgeCount(this,icon,"0");
         }
-       return true;
+        return true;
     }
 
 
@@ -294,27 +293,4 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawerLis
 
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

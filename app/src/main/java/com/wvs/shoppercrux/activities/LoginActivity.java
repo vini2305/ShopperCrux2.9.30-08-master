@@ -93,8 +93,7 @@ public class LoginActivity extends AppCompatActivity implements ConnectivityRece
 //            mTextDetails.setText(constructWelcomeMessage(profile));
             session.setLogin(true);
             fbSignUp();
-
-            //   finish();
+             finish();
 
         }
 
@@ -136,7 +135,7 @@ public class LoginActivity extends AppCompatActivity implements ConnectivityRece
         emailLabel = (TextInputLayout) findViewById(R.id.input_email_label);
         passwordLabel = (TextInputLayout) findViewById(R.id.input_password_label);
 
-       email.setTextColor(Color.parseColor("#277bd5"));
+        email.setTextColor(Color.parseColor("#277bd5"));
         password.setTextColor(Color.parseColor("#277bd5"));
         login.setTextColor(Color.parseColor("#ffffff"));
 

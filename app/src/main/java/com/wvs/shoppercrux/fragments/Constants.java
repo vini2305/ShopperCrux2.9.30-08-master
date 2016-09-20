@@ -8,6 +8,6 @@ public class Constants {
     public static boolean setLocation = false;
     public static boolean mapView = true;
     public static boolean listview = false;
-
+public  static String catId=null;
 
 }

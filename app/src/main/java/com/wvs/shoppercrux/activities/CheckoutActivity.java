@@ -96,6 +96,9 @@ public class CheckoutActivity extends AppCompatActivity implements OnItemSelecte
                 String userphone = phone.getText().toString().trim();
                 String useraddress = address.getText().toString().trim();
                 String pincode = spinner.getSelectedItem().toString();
+                String[] part= pincode.split("-");
+                String pincodePart = part[0];
+
                 Log.d("Pincode","Pin code:"+pincode);
 
                 SharedPreferences sharedPreferences = getSharedPreferences(PHONE_PREFS_NAME, Context.MODE_PRIVATE);
@@ -103,7 +106,6 @@ public class CheckoutActivity extends AppCompatActivity implements OnItemSelecte
                 sharedEditor.putString("ContactNumber", userphone);
                 sharedEditor.putString("Address", useraddress);
                 sharedEditor.apply();
-
 
                 SharedPreferences preferences= getSharedPreferences(LOCATION_PIN,MODE_PRIVATE);
                 String setPinCode =preferences.getString("Pincode",null);
@@ -115,13 +117,12 @@ public class CheckoutActivity extends AppCompatActivity implements OnItemSelecte
                 } else if (!isValidPhoneNumber(userphone)){
                     Toast.makeText(getApplicationContext(), "Please enter valid mobile number", Toast.LENGTH_SHORT).show();
                 }
-                else if((setPinCode != null) && (!pincode.equals(setPinCode))) {
+                else if((setPinCode != null) && (!pincodePart.equals(setPinCode))) {
                 Toast.makeText(getApplicationContext(),"You are choosing a different location to deliver",Toast.LENGTH_SHORT).show();
-                } else if((setPinCode != null) && (pincode.equals(setPinCode))) {
+                } else if((setPinCode != null) && (pincodePart.equals(setPinCode))) {
                     String userid = SQLiteHandler.user_id;
                     Log.d("user id","User id:"+userid);
                     sendOtp(userphone,userid);
-
                 }
             }
         });

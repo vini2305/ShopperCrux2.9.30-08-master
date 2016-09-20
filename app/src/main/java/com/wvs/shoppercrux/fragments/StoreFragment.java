@@ -22,6 +22,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -53,24 +54,24 @@ public class StoreFragment extends Fragment implements OnQueryTextListener {
     RecyclerViewAdapter recyclerViewadapter;
     Toolbar toolbar;
     String GET_JSON_DATA_HTTP_URL = "http://shoppercrux.com/shopper_android_api/seller.php?id=";
-    String GET_CATEGORY_BASED="http://shoppercrux.com/shopper_android_api/store.php";
+    String GET_CATEGORY_BASED = "http://shoppercrux.com/shopper_android_api/store.php";
     String JSON_IMAGE_TITLE_NAME = "nickname";
     String JSON_IMAGE_URL = "banner";
     String SELLER_ID = "seller_id";
     String SELLER_ADDRESS = "seller_address";
-    String STORE_URL,CATEGORY_STORE_URL;
-    JsonArrayRequest jsonArrayRequest,jsonArrayRequest1;
+    String STORE_URL, CATEGORY_STORE_URL;
+    JsonArrayRequest jsonArrayRequest, jsonArrayRequest1;
     Context context;
     RequestQueue requestQueue;
     View view;
-    String id,sid,plid;
+    String id, sid, plid;
     private SearchManager searchManager;
     private SearchView searchView;
     private MenuItem mSearchItem;
     private LinearLayoutManager layoutManager;
     private FloatingActionButton setLocation, mapView;
     private FloatingActionMenu menu;
-    public static String LOCATION_PIN="LocationPin";
+    public static String LOCATION_PIN = "LocationPin";
 
     public StoreFragment() {
         // Required empty public constructor
@@ -83,25 +84,32 @@ public class StoreFragment extends Fragment implements OnQueryTextListener {
 
         view = inflater.inflate(R.layout.fragment_store, container, false);
 
+
         Bundle bundle = this.getArguments();
+
+
         if (bundle != null) {
-            if(bundle.getString("locationId") != null) {
+            if (Constants.catId != null) {
+
+//                String viniCat = bundle.getString("categoryId");
+//                Log.d("viniCat",viniCat);
+//                SharedPreferences preferences= context.getSharedPreferences(LOCATION_PIN,context.MODE_PRIVATE);
+//                String setPinCode =preferences.getString("LocationId",null);
+//                Log.d("Shared location code","Location id:"+setPinCode);
+//                if(setPinCode != null){
+                plid = bundle.getString("locationId");
+                sid = Constants.catId;
+                Log.d("viniConCat", sid);
+                CATEGORY_STORE_URL = GET_CATEGORY_BASED + "?sid=" + plid + "&id=" + sid;
+                Log.d("categoryUrl", CATEGORY_STORE_URL);
+                storeFromCategory();
+//                }
+
+            } else if (bundle.getString("locationId") != null) {
                 id = bundle.getString("locationId");
                 STORE_URL = GET_JSON_DATA_HTTP_URL + id;
                 Log.d("store_url", STORE_URL);
-            }
-           else if((bundle.getString("categoryId")!= null)){
-
-                SharedPreferences preferences= context.getSharedPreferences(LOCATION_PIN,context.MODE_PRIVATE);
-                String setPinCode =preferences.getString("LocationId",null);
-                Log.d("Shared location code","Location id:"+setPinCode);
-                if(setPinCode != null){
-                    plid = bundle.getString("locationId");
-                    sid = bundle.getString("categoryId");
-                    CATEGORY_STORE_URL = GET_CATEGORY_BASED+"?sid="+sid+"&id="+plid;
-                    Log.d("categoryUrl", CATEGORY_STORE_URL);
-                }
-
+                JSON_DATA_WEB_CALL();
             }
         }
 
@@ -112,8 +120,8 @@ public class StoreFragment extends Fragment implements OnQueryTextListener {
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
 
-       JSON_DATA_WEB_CALL();
-        storeFromCategory();
+
+
 
         Log.d("sellerid", SELLER_ID);
         setLocation = (FloatingActionButton) view.findViewById(R.id.locationBtn);
@@ -135,12 +143,16 @@ public class StoreFragment extends Fragment implements OnQueryTextListener {
         mapView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Constants.setLocation=false;
-                Constants.mapView=true;
+                Constants.setLocation = false;
+                Constants.mapView = true;
 
                 FragmentManager fragmentManager2 = getFragmentManager();
                 FragmentTransaction fragmentTransaction2 = fragmentManager2.beginTransaction();
                 HomeFragment fragment2 = new HomeFragment();
+                Bundle bundle = new Bundle();
+                String data = com.wvs.shoppercrux.Gson.RecyclerViewAdapter.locationData;
+                bundle.putString("locationId", data);
+                bundle.putString("categoryId", Constants.catId);
                 fragmentTransaction2.hide(StoreFragment.this);
                 fragmentTransaction2.add(R.id.content_frame, fragment2);
                 fragmentTransaction2.commit();
@@ -154,7 +166,7 @@ public class StoreFragment extends Fragment implements OnQueryTextListener {
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         // Inflate the menu; this adds items to the action bar if it is present.
-     //   getActivity().getMenuInflater().inflate(R.menu.menu_main, menu);
+        //   getActivity().getMenuInflater().inflate(R.menu.menu_main, menu);
 
         mSearchItem = menu.findItem(R.id.search);
         searchManager = (SearchManager) getActivity().getSystemService(Context.SEARCH_SERVICE);
@@ -234,6 +246,8 @@ public class StoreFragment extends Fragment implements OnQueryTextListener {
 
         requestQueue = Volley.newRequestQueue(getContext());
         requestQueue.add(jsonArrayRequest1);
+
+        Log.e("Filter",requestQueue.toString());
     }
 
     public void JSON_PARSE_DATA_AFTER_WEBCALL(JSONArray array) {
@@ -245,12 +259,19 @@ public class StoreFragment extends Fragment implements OnQueryTextListener {
             JSONObject json = null;
             try {
 
-                json = array.getJSONObject(i);
 
-                getDataAdapter.setImageTitleNamee(json.getString(JSON_IMAGE_TITLE_NAME));
-                getDataAdapter.setImageServerUrl(json.getString(JSON_IMAGE_URL));
-                getDataAdapter.setSellerID(json.getString(SELLER_ID));
-                getDataAdapter.setSellerAddress(json.getString(SELLER_ADDRESS).replaceAll("\t", ""));
+                json = array.getJSONObject(i);
+                if(array.getJSONObject(i).has("message")){
+
+                } else {
+                    getDataAdapter.setImageTitleNamee(json.getString(JSON_IMAGE_TITLE_NAME));
+                    getDataAdapter.setImageServerUrl(json.getString(JSON_IMAGE_URL));
+                    getDataAdapter.setSellerID(json.getString(SELLER_ID));
+                    Log.d("seller_id",json.getString(SELLER_ID));
+                    getDataAdapter.setSellerAddress(json.getString(SELLER_ADDRESS).replaceAll("\t", ""));
+                }
+
+
 
             } catch (JSONException e) {
 
@@ -290,13 +311,13 @@ public class StoreFragment extends Fragment implements OnQueryTextListener {
         return true;
     }
 
-    private List<GetDataAdapter> filter(List<GetDataAdapter> stores,String query){
+    private List<GetDataAdapter> filter(List<GetDataAdapter> stores, String query) {
         query = query.toLowerCase();
 
         final List<GetDataAdapter> storeList = new ArrayList<>();
-        for(GetDataAdapter store : stores) {
+        for (GetDataAdapter store : stores) {
             final String storeName = store.getImageTitleName().toLowerCase();
-            if(storeName.contains(query)){
+            if (storeName.contains(query)) {
                 storeList.add(store);
             }
         }

@@ -55,12 +55,12 @@
 
     <string-array name="pincode_array">
         <item>Select Pincode</item>
-        <item>560032</item>
-        <item>560098</item>
-        <item>583222</item>
-        <item>515201</item>
-        <item>560064</item>
-        <item>577201</item>
+        <item>560032-RT Nagar</item>
+        <item>560098-RR Nagar</item>
+        <item>583222-Hospete</item>
+        <item>515201-Hindupur</item>
+        <item>560064-Yelahanka</item>
+        <item>577201-Shivamogga</item>
     </string-array>
     <string name="title_activity_intro">IntroActivity</string>
 
